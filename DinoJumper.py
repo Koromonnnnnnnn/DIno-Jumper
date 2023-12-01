@@ -40,7 +40,7 @@ while not gameGoing:
             print("reset to ", CactusXpos[x])
 
     for x, y in zip(CactusXpos, CactusHeights):
-        a = pygame.Rect((x, 480-y), (30, 80))
+        a = pygame.Rect((x, 500-y), (30, 80))
         b = pygame.Rect((p1x, p1y), (30, 30))
         if a.colliderect(b) == True:
             print("Collision")
@@ -48,11 +48,12 @@ while not gameGoing:
 
     # Gravity
     if (p1y + 30) < 500:
-        p1y += 1
+        yVel += 1
 
     # Turn off flying
     if (p1y+30) == 500:
         touchGround = True
+        print("TouchedGround")
     else:
         touchGround = False
 
@@ -64,15 +65,16 @@ while not gameGoing:
     # Input Section
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w] and touchGround == True:
-        yVel = - 20
+        yVel = - 1
 
     # Render Section
     screen.fill((0, 0, 0))
 
+    pygame.draw.line(screen, (255, 255, 255), [349, 0], [349, 500], 5)
     pygame.draw.rect(screen, (255, 255, 255), (p1x, p1y, 60, 60), 1)
 
     for x, y in zip(CactusXpos, CactusHeights):
-        screen.blit(CactusImg, (x - 15, 475 - y))
+        screen.blit(CactusImg, (x-15, 475-y))
 
     pygame.display.flip()
 
