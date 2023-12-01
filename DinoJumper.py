@@ -59,7 +59,7 @@ while not gameGoing:
 
     if touchGround == False:
         yVel += 1
-    else:
+    elif touchGround == True:
         yVel = 0
 
     # Input Section
