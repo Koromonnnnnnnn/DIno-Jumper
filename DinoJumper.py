@@ -64,16 +64,15 @@ while not gameGoing:
     # Input Section
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w] and touchGround == True:
-        yVel = -20
+        yVel = - 20
 
     # Render Section
     screen.fill((0, 0, 0))
 
-    pygame.draw.line(screen, (255, 255, 255), [349, 0], [349, 500], 5)
     pygame.draw.rect(screen, (255, 255, 255), (p1x, p1y, 60, 60), 1)
 
     for x, y in zip(CactusXpos, CactusHeights):
-        screen.blit(CactusImg, (x-15, 480-y))
+        screen.blit(CactusImg, (x - 15, 475 - y))
 
     pygame.display.flip()
 
