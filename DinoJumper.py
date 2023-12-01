@@ -14,7 +14,7 @@ CactusImg = pygame.transform.scale(CactusImg, (100, 100))
 p1x = 0
 p1y = 0
 
-yVel = 0
+yVel = 1
 
 touchGround = False
 
@@ -61,13 +61,10 @@ while not gameGoing:
     else:
         yVel = 0
 
-    if p1y + 20 >= 700:
-        yVel = 0
-
     # Input Section
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w] and touchGround == True:
-        p1y -= 5
+        yVel = -20
 
     # Render Section
     screen.fill((0, 0, 0))
