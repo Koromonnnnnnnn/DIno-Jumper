@@ -18,7 +18,7 @@ yVel = 1
 
 touchGround = False
 
-CactusHeights = [80, 40, 20, 80, 30]
+CactusHeights = [40, 20, 60, 30, 80] # Adjusted heights to fit within the ground
 CactusXpos = []
 for x in range(1, 5):
     CactusXpos.append(random.randrange(200, 3000))
@@ -49,23 +49,14 @@ while not gameGoing:
     # Gravity
     if (p1y + 30) < 500:
         yVel += 1
-
-    # Turn off flying
-    if (p1y+30) == 500:
-        touchGround = True
-        print("TouchedGround")
     else:
-        touchGround = False
-
-    if touchGround == False:
-        yVel += 1
-    elif touchGround == True:
+        p1y = 470 # Adjust the value to ensure the player is on the ground
         yVel = 0
 
     # Input Section
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w] and touchGround == True:
-        yVel = - 1
+        yVel = -1
 
     # Render Section
     screen.fill((0, 0, 0))
