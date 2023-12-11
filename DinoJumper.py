@@ -3,7 +3,7 @@ import random
 
 pygame.init()
 screen = pygame.display.set_mode((700, 500))
-pygame.display.set_caption("DIno Jumper")
+pygame.display.set_caption("Dino Jumper")
 gameGoing = False
 clock = pygame.time.Clock()
 
@@ -14,11 +14,13 @@ CactusImg = pygame.transform.scale(CactusImg, (100, 100))
 p1x = 0
 p1y = 0
 
-yVel = 1
+yVel = 0
 
-touchGround = False
+jumping = False
+jump_count = 15  
 
-CactusHeights = [40, 20, 60, 30, 80] # Adjusted heights to fit within the ground
+
+CactusHeights = [40, 20, 60, 30, 80]
 CactusXpos = []
 for x in range(1, 5):
     CactusXpos.append(random.randrange(200, 3000))
@@ -27,6 +29,24 @@ while not gameGoing:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gameGoing = True
+
+    keys = pygame.key.get_pressed()
+
+    # Jumping logic
+    if not jumping:
+        if keys[pygame.K_SPACE]:
+            jumping = True
+    else:
+        if jump_count >= -15:
+            neg = 1
+            if jump_count < 0:
+                neg = -1
+            
+            p1y -= (jump_count ** 2) * 0.4 * neg
+            jump_count -= 1
+        else:
+            jumping = False
+            jump_count = 15
 
     p1y += yVel
 
@@ -48,15 +68,10 @@ while not gameGoing:
 
     # Gravity
     if (p1y + 30) < 500:
-        yVel += 1
+        yVel += 0.3   
     else:
-        p1y = 470 # Adjust the value to ensure the player is on the ground
+        p1y = 470
         yVel = 0
-
-    # Input Section
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_w] and touchGround == True:
-        yVel = -1
 
     # Render Section
     screen.fill((0, 0, 0))
